@@ -18,9 +18,7 @@ class MyApp extends StatelessWidget {
       title: "Shopping App",
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      home: ProductDetails(
-        product: products[0],
-      ),
+      home : const HomePage(),
     );
   }
 }

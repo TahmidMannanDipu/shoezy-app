@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/core/theme.dart';
+import 'package:shop_app/data/product_data.dart';
+import 'package:shop_app/pages/product_details.dart';
 import 'package:shop_app/pages/product_items.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,7 +76,9 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              Expanded(child: ProductItems()),
+              Expanded(
+                child: ProductItems(),
+              ),
             ],
           ),
         ),

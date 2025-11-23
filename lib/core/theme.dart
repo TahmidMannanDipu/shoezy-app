@@ -41,4 +41,5 @@ ThemeData appTheme = ThemeData(
     hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
     prefixIconColor: colorScheme.primary,
   ),
+
 );
