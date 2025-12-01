@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/core/theme.dart';
-import 'package:shop_app/data/product_data.dart';
+
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.product});
