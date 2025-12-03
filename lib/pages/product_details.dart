@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/core/theme.dart';
+import 'package:provider/provider.dart';
 
+import 'package:shop_app/core/theme.dart';
+import 'package:shop_app/data/product_data.dart';
+import '../state/cart_provider.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.product});
@@ -12,6 +15,23 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  void addToCart() {
+    if (selectedSize != 0) {
+      Provider.of<CartProvider>(context, listen: false).addProduct({
+        'id': widget.product['id'],
+        'title': widget.product['title'],
+        'price': widget.product['price'],
+        'sizes': selectedSize,
+        'company': widget.product['company'],
+        'imageUrl': widget.product['imageUrl'],
+      });
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Please select shoe size")));
+    }
+  }
+
   int selectedSize = 0;
   @override
   @override
@@ -53,12 +73,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                               if( selectedSize == size) {
-                                 selectedSize = 0;
-                               }
-                               else {
-                                 selectedSize = size;
-                               }
+                                if (selectedSize == size) {
+                                  selectedSize = 0;
+                                } else {
+                                  selectedSize = size;
+                                }
                               });
                             },
 
@@ -83,7 +102,29 @@ class _ProductDetailsState extends State<ProductDetails> {
                   const SizedBox(height: 40),
 
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      if(selectedSize !=0) {
+                        addToCart();
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text('Added to Cart',
+                        style: TextStyle(
+                          color: appTheme.colorScheme.onPrimary,
+                        ),
+                        ),
+
+                        backgroundColor: appTheme.colorScheme.primary,));
+                      }
+                      else {
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text('select show size'),
+                        backgroundColor: Colors.red,
+                        ),
+
+                        );
+                      }
+                    },
                     label: Text(
                       "Add to Cart",
                       style: TextStyle(
